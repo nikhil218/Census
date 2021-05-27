@@ -1,0 +1,2 @@
+com/census/StateCensusAnalyserTest.java
+ com.census.StateCensusAnalyserTest
