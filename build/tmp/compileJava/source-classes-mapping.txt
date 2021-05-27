@@ -2,5 +2,6 @@ com/census/CSVStateCensus.java
  com.census.CSVStateCensus
 com/census/CensusAnalyzerException.java
  com.census.CensusAnalyzerException
+ com.census.CensusAnalyzerException$ExceptionType
 com/census/StateCensusAnalyzer.java
  com.census.StateCensusAnalyzer

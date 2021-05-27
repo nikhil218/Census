@@ -1,9 +1,16 @@
 package com.census;
 
-public class CensusAnalyzerException extends Exception {
-    public CensusAnalyzerException(){}
+public class CensusAnalyzerException extends Exception{
+    public enum ExceptionType {
+        WRONG_FILE,
+        WRONG_FILE_TYPE,
+        WRONG_FILE_DELIMITER;
+    }
 
-    public CensusAnalyzerException(String s){
+    public ExceptionType type;
+
+    public CensusAnalyzerException(String s, ExceptionType type){
         super(s);
+        this.type = type;
     }
 }

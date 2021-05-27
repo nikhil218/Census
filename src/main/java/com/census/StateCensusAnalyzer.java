@@ -7,31 +7,31 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Iterator;
 import java.util.stream.StreamSupport;
+import java.io.IOException;
 
 public class StateCensusAnalyzer {
     public int loadData(String path) throws CensusAnalyzerException{
-        int numberOfEntries = 0;
-        try {
-            Reader reader = Files.newBufferedReader(Paths.get(path));
-            CsvToBean<CSVStateCensus> csvToBean = new CsvToBeanBuilder(reader).
-                    withType(CSVStateCensus.class).
-                    withIgnoreLeadingWhiteSpace(true).
-                    build();
-            Iterator<CSVStateCensus> CSVStateCensusIterator = csvToBean.iterator();
-
-            while(CSVStateCensusIterator.hasNext()){
-                CSVStateCensus censusAnalyser = CSVStateCensusIterator.next();
-                System.out.println("State : " + censusAnalyser.getState());
-                System.out.println("Population : " + censusAnalyser.getPopulation());
-                System.out.println("AreaInSqKm : " + censusAnalyser.getAreaInSqKm());
-                System.out.println("DensityPerSqKm : " + censusAnalyser.getDensityPerSqKm());
-                System.out.println("\n=====================\n");
-                numberOfEntries++;
+        if (path.contains(".csv")) {
+            int numberOfEntries = 0;
+            try {
+                Reader reader = Files.newBufferedReader(Paths.get(path));
+                CsvToBean<CSVStateCensus> csvToBean = new CsvToBeanBuilder(reader).
+                        withType(CSVStateCensus.class).
+                        withIgnoreLeadingWhiteSpace(true).
+                        build();
+                Iterator<CSVStateCensus> CSVStateCensusIterator = csvToBean.iterator();
+                Iterable<CSVStateCensus> iterator=() -> CSVStateCensusIterator;
+                return (int) StreamSupport.stream(iterator.spliterator(),false).count();
+            }
+            catch (IOException e) {
+                throw new CensusAnalyzerException("Invalid File path", CensusAnalyzerException.ExceptionType.WRONG_FILE);
+            }
+            catch (RuntimeException e) {
+                throw new CensusAnalyzerException(e.getMessage(), CensusAnalyzerException.ExceptionType.WRONG_FILE_DELIMITER);
             }
         }
-        catch (Exception e) {
-            e.printStackTrace();
+        else {
+            throw new CensusAnalyzerException("Invalid File Type", CensusAnalyzerException.ExceptionType.WRONG_FILE_TYPE);
         }
-        return numberOfEntries;
     }
 }
