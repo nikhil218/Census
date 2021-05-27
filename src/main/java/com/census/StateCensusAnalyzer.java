@@ -9,8 +9,8 @@ import java.util.Iterator;
 import java.util.stream.StreamSupport;
 
 public class StateCensusAnalyzer {
-    public int loadData(String path) {
-        int i = 0;
+    public int loadData(String path) throws CensusAnalyzerException{
+        int numberOfEntries = 0;
         try {
             Reader reader = Files.newBufferedReader(Paths.get(path));
             CsvToBean<CSVStateCensus> csvToBean = new CsvToBeanBuilder(reader).
@@ -26,12 +26,12 @@ public class StateCensusAnalyzer {
                 System.out.println("AreaInSqKm : " + censusAnalyser.getAreaInSqKm());
                 System.out.println("DensityPerSqKm : " + censusAnalyser.getDensityPerSqKm());
                 System.out.println("\n=====================\n");
-                i++;
+                numberOfEntries++;
             }
         }
         catch (Exception e) {
             e.printStackTrace();
         }
-        return i;
+        return numberOfEntries;
     }
 }
