@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.census.StateCensusAnalyserTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-05-27T15:21:45" hostname="LAPTOP-80EMV161" time="0.195">
+<testsuite name="com.census.StateCensusAnalyserTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-05-27T15:58:19" hostname="LAPTOP-80EMV161" time="0.19">
   <properties/>
-  <testcase name="givenWrongDelimiterShouldThrowCustomException()" classname="com.census.StateCensusAnalyserTest" time="0.195"/>
+  <testcase name="givenWrongHeaderShouldThrowCustomException()" classname="com.census.StateCensusAnalyserTest" time="0.19"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

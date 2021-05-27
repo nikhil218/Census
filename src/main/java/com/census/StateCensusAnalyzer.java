@@ -27,6 +27,9 @@ public class StateCensusAnalyzer {
                 throw new CensusAnalyzerException("Invalid File path", CensusAnalyzerException.ExceptionType.WRONG_FILE);
             }
             catch (RuntimeException e) {
+                if(e.getMessage().contains("CSV header"))
+                    throw new CensusAnalyzerException(e.getMessage(), CensusAnalyzerException.ExceptionType.WRONG_HEADER);
+
                 throw new CensusAnalyzerException(e.getMessage(), CensusAnalyzerException.ExceptionType.WRONG_FILE_DELIMITER);
             }
         }

@@ -50,4 +50,18 @@ public class StateCensusAnalyserTest {
             Assertions.assertEquals(e.type, CensusAnalyzerException.ExceptionType.WRONG_FILE_DELIMITER);
         }
     }
+
+    @Test
+    public void givenWrongHeaderShouldThrowCustomException() {
+        StateCensusAnalyzer stateCensusAnalyser = new StateCensusAnalyzer();
+        try{
+            stateCensusAnalyser.loadData(rightPath);
+        }
+        catch(CensusAnalyzerException e) {
+            System.out.println(e.type);
+            Assertions.assertEquals(e.type, CensusAnalyzerException.ExceptionType.WRONG_HEADER);
+        }
+    }
+
+
 }
